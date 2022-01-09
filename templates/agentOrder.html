@@ -1,0 +1,60 @@
+<div class="container">
+    <h1 class="text-center indigo-text">Make order</h1>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="load in loads">
+            <div class="card mb-3">
+
+                <!-- Card image -->
+                <div class="view view-cascade overlay">
+                    <img class="card-img-top" src="img/Camping-Experience.jpg" alt="Card image cap"
+                        style="height: 200px;">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+
+                <!-- Card content -->
+                <div class="card-body card-body-cascade">
+
+                    <!-- Label -->
+                    <h6 class="purble-text pb-2 pt-1">{{2000|currency}} per kilo</h6>
+                    <!-- Title -->
+                    <h5 class="font-weight-bold card-title">{{load.fish_type}}</h5>
+                    <!-- Text -->
+                    <p>Available quantity: <span class="float-right">{{load.quantity}} KGs</span></p>
+                    <p class="card-text">{{load.fishing_boat}}</p>
+                </div>
+
+                <!-- Card footer -->
+                <div class="card-footer text-muted">
+
+                    <button class="btn btn-indigo btn-sm btn-block" ng-click="showOrderForm(load)">Order</button>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header indigo white-text">
+                    Please Enter the Quantity
+                </div>
+                <div class="modal-body indigo lighten-5">
+                    <form ng-submit="$event.preventDefault();makeOrder()">
+                        <div class="form-group">
+                            Quantity:
+                            <input type="number" class="form-control" min="0" step="any" ng-model="ordered_quantity"
+                                required>
+                        </div>
+                        <button class="btn btn-success btn-block">submit</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

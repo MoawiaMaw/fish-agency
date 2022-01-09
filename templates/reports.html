@@ -1,0 +1,257 @@
+<div class="container">
+    <h1 class="text-center indigo-text">Reports</h1>
+    <div class="row mb-3" ng-model="report">
+        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2">
+            <button class="btn btn-sm btn-info" ng-click="boatsLoadsDetails()"
+                style="height: 100px; width: 100%;">Generate loads
+                details report of each
+                boat</button>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2">
+            <button class="btn btn-sm btn-info" ng-click="pendingReport()" style="height: 100px; width: 100%;">Generate
+                pending
+                orders report</button>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2">
+            <button class="btn btn-sm btn-info" ng-click="batchDistribution()"
+                style="height: 100px; width: 100%;">Generate batch
+                distrbution
+                report</button>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2">
+            <button class="btn btn-sm btn-info" ng-click="comulativeReport()"
+                style="height: 100px; width: 100%;">Generate
+                Comulative loads report of each
+                boat</button>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2">
+            <button class="btn btn-sm btn-info" ng-click="comparisonSummary()"
+                style="height: 100px; width: 100%;">Generate
+                Comparison Summary
+                report</button>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-2">
+            <button class="btn btn-sm btn-info" ng-click="relationalReport()"
+                style="height: 100px; width: 100%;">Generate
+                Relational report
+                (types-quantites)</button>
+        </div>
+        <div class="mt-3" ng-if="report == 'pending report'" style="width: 100%;">
+            <h1>Pending Orders Report</h1>
+            <ol>
+                <li ng-repeat="order in pendingOrders">
+                    In ( {{order.order_time}} ), agent {{order.agent}} ordered {{order.ordered_quantity}} KGs of
+                    {{order.fish_type}}. And the available
+                    quantity was {{order.available_quantity}} KGs
+                </li>
+            </ol>
+
+            <button class="btn btn-primary float-right">Print</button>
+        </div>
+        <div class="mt-3" ng-if="report == 'batchDistribution report'" style="width: 100%;">
+            <h1>Batch Distrbution Report</h1>
+            <ol>
+                <li ng-repeat="order in orders">
+                    Batch no. {{order.id}}, {{order.ordered_quantity}} KGs of {{order.fish_type}} was distributed to
+                    agent {{order.agent}}.
+                </li>
+            </ol>
+
+            <button class="btn btn-primary float-right">Print</button>
+        </div>
+        <div class="mt-3" ng-if="report == 'boatsLoadsDetails report'" style="width: 100%;">
+            <h1>Boats Loads Details Report</h1>
+            <ol>
+                <li>
+                    <h3>George's Boat:</h3>
+                    <ul>
+                        <li ng-repeat="load in georgeLoads">
+                            In {{load.delivery_time}}, a {{load.quantity}} KGs of {{load.fish_type}} was delievered
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Maw's Boat:</h3>
+                    <ul>
+                        <li ng-repeat="load in mawLoads">
+                            In {{load.delivery_time}}, a {{load.quantity}} KGs of {{load.fish_type}} was delievered
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Ahmed's Boat:</h3>
+                    <ul>
+                        <li ng-repeat="load in ahmedLoads">
+                            In {{load.delivery_time}}, a {{load.quantity}} KGs of {{load.fish_type}} was delievered
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+
+            <button class="btn btn-primary float-right">Print</button>
+        </div>
+        <div class="mt-3" ng-if="report == 'comulative report'" style="width: 100%;">
+            <h1>
+                Comulative loads report based on fish type
+            </h1>
+            <ol>
+                <li>
+                    <h3>Grouper:</h3>
+                    <ul>
+                        <li ng-repeat="load in grouperLoads">
+                            In {{load.delivery_time}}, a {{load.quantity}} KGs of {{load.fish_type}} was delievered by
+                            {{load.fishing_boat}}
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Mackerel:</h3>
+                    <ul>
+                        <li ng-repeat="load in mackerelLoads">
+                            In {{load.delivery_time}}, a {{load.quantity}} KGs of {{load.fish_type}} was delievered by
+                            {{load.fishing_boat}}
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Tilapia:</h3>
+                    <ul>
+                        <li ng-repeat="load in tilapiaLoads">
+                            In {{load.delivery_time}}, a {{load.quantity}} KGs of {{load.fish_type}} was delievered by
+                            {{load.fishing_boat}}
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+
+            <button class="btn btn-primary float-right">Print</button>
+        </div>
+        <div class="mt-3" ng-if="report == 'comparisonSummary report'" style="width: 100%;">
+            <h1>
+                Comparison Summary between requested and delivered quantites of each fish type
+            </h1>
+            <ol>
+                <li>
+                    <h3>Grouper:</h3>
+                    <ul>
+                        <li>
+                            Pending orders: {{X}}
+                            <ol>
+                                <li ng-repeat="order in grouperOrders" ng-if="order.status == 'pending'">
+                                    In {{order.order_time}}, a {{order.ordered_quantity}} KGs of
+                                    {{order.fish_type}} was
+                                    ordered by agent {{order.agent}} and the available quantity was
+                                    {{order.available_quantity}}.
+                                </li>
+
+                            </ol>
+                        </li>
+                        <li>
+                            Delivered orders:
+                            <ol>
+                                <li ng-repeat="order in grouperOrders" ng-if="order.status == 'OK'">
+                                    In {{order.order_time}}, a {{order.ordered_quantity}} KGs of {{order.fish_type}} was
+                                    ordered by agent {{order.agent}} and the available quantity was
+                                    {{order.available_quantity}}.
+                                </li>
+                            </ol>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Mackerel:</h3>
+                    <ul>
+                        <li>
+                            Pending orders: {{X}}
+                            <ol>
+                                <li ng-repeat="order in mackerelOrders" ng-if="order.status == 'pending'">
+                                    In {{order.order_time}}, a {{order.ordered_quantity}} KGs of
+                                    {{order.fish_type}} was
+                                    ordered by agent {{order.agent}} and the available quantity was
+                                    {{order.available_quantity}}.
+                                </li>
+                            </ol>
+                        </li>
+                        <li>
+                            Delivered orders:
+                            <ol>
+                                <li ng-repeat="order in mackerelOrders" ng-if="order.status == 'OK'">
+                                    In {{order.order_time}}, a {{order.ordered_quantity}} KGs of {{order.fish_type}} was
+                                    ordered by agent {{order.agent}} and the available quantity was
+                                    {{order.available_quantity}}.
+                                </li>
+                            </ol>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Tilapia:</h3>
+                    <ul>
+                        <li>
+                            Pending orders:
+                            <ol>
+                                <li ng-repeat="order in tilapiaOrders" ng-if="order.status == 'pending'">
+                                    In {{order.order_time}}, a {{order.ordered_quantity}} KGs of {{order.fish_type}} was
+                                    ordered by agent {{order.agent}} and the available quantity was
+                                    {{order.available_quantity}}.
+                                </li>
+
+                            </ol>
+                        </li>
+                        <li>
+                            Delivered orders:
+                            <ol>
+                                <li ng-repeat="order in tilapiaOrders" ng-if="order.status == 'OK'">
+                                    In {{order.order_time}}, a {{order.ordered_quantity}} KGs of {{order.fish_type}} was
+                                    ordered by agent {{order.agent}} and the available quantity was
+                                    {{order.available_quantity}}.
+                                </li>
+                            </ol>
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+
+            <button class="btn btn-primary float-right">Print</button>
+        </div>
+        <div class="mt-3" ng-if="report == 'relational report'" style="width: 100%;">
+            <h1>
+                Relational Report between types and qunatites
+            </h1>
+            <ol>
+                <li>
+                    <h3>Grouper:</h3>
+                    <ul>
+                        <li ng-repeat="load in grouperLoads">
+                            At {{load.delivery_time}}, batch no {{load.id}}, the available quantity was
+                            {{load.quantity}}
+                            KGs
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Mackerel:</h3>
+                    <ul>
+                        <li ng-repeat="load in mackerelLoads">
+                            At {{load.delivery_time}}, batch no {{load.id}}, the available quantity was
+                            {{load.quantity}}
+                            KGs
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Tilapia:</h3>
+                    <ul>
+                        <li ng-repeat="load in tilapiaLoads">
+                            At {{load.delivery_time}}, batch no {{load.id}}, the available quantity was
+                            {{load.quantity}}
+                            KGs
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+
+            <button class="btn btn-primary float-right">Print</button>
+        </div>
+    </div>
+</div>

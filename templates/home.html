@@ -1,0 +1,34 @@
+<div class="container">
+    <h1 class="text-center mb-3 indigo-text">Load Delivery</h1>
+
+    <form action="" ng-submit="$event.preventDefault();addLoadDelivery()">
+        <div class="form-group">
+            Fishing boat:
+            <select name="" id="" class="form-control" required ng-model="boat">
+                <option value="" disabled>Please select the boat...</option>
+                <option value="Goerge boat">Goerge's Boat</option>
+                <option value="Maw boat">Maw's Boat</option>
+                <option value="Ahmed boat">Ahmed's Boat</option>
+            </select>
+        </div>
+        <div class="form-group" aria-required="true">
+            Fish type:
+            <ul style="list-style: none;">
+                <li class="radio">
+                    <label><input type="radio" name="fishType" ng-model="type" value="Tilapia" required> Tilapia</label>
+                </li>
+                <li class="radio">
+                    <label><input type="radio" name="fishType" ng-model="type" value="Mackerel"> Mackerel</label>
+                </li>
+                <li class="radio">
+                    <label><input type="radio" name="fishType" ng-model="type" value="Grouper"> Grouper</label>
+                </li>
+            </ul>
+        </div>
+        <div class="form-group">
+            Quantity in KGs:
+            <input type="number" class="form-control" min="0" step="any" ng-model="quantity" required>
+        </div>
+        <button class="btn btn-success btn-block">submit</button>
+    </form>
+</div>
